@@ -1,0 +1,35 @@
+@import '../../../resources/styles/variables.less';
+
+.footer {
+  color: @base-white;
+  // position: absolute;
+  // bottom: 0;
+  width: 100%;
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+
+  &__description {
+    font-family: @font-poppins;
+    font-weight: 200;
+    font-size: 1.2rem;
+    display: flex;
+    gap: 0.2rem;
+  }
+  &__username {
+    font-family: @font-poppins;
+    font-weight: 500;
+    text-decoration-line: underline;
+    color: @base-white;
+    font-size: 1.2rem;
+    padding-bottom: 0.2rem;
+    display: flex;
+    align-items: center;
+  }
+  &__avatar {
+    border-radius: 100%;
+    width: 1.3rem;
+    margin-left: 0.3rem;
+    margin-right: 0.1rem;
+  }
+}

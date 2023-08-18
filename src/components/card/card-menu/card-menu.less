@@ -1,0 +1,56 @@
+@import '../../../resources/styles/variables.less';
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 3rem;
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &--title {
+      font-family: @font-poppins;
+      font-weight: 700;
+      font-size: 2.4rem;
+      color: @base-blue;
+    }
+    &--description {
+      font-family: @font-poppins;
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: @base-blue;
+      text-align: center;
+    }
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    &--select {
+      font-family: @font-poppins;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: @base-blue;
+      border: none;
+      background-color: transparent;
+      outline: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      width: 60%;
+      text-align: center;
+      border-bottom: 1px solid @base-blue;
+    }
+    &--input {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+}
+
+option {
+  font-size: 1.5rem;
+}

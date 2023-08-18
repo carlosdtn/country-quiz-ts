@@ -1,6 +1,18 @@
 @import './resources/styles/variables.less';
 
-.main {
+.app {
   background-color: @base-purple;
   height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  &__main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95%;
+    width: 100%;
+  }
 }

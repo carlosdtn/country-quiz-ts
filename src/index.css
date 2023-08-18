@@ -4,3 +4,18 @@
   box-sizing: border-box;
   font-size: 62.5%;
 }
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  html,
+  body,
+  #root,
+  .app {
+    height: 100dvh;
+  }
+}

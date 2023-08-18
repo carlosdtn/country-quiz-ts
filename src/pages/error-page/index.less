@@ -1,0 +1,36 @@
+@import './../../resources/styles/variables.less';
+
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: @base-purple;
+  height: 100%;
+  font-family: @font-poppins;
+  font-size: 4rem;
+  color: @base-white;
+  gap: 3rem;
+
+  &__container {
+    width: 60%;
+    text-align: center;
+  }
+
+  &__return {
+    padding: 1rem 2rem;
+    border: 1px solid @base-white;
+    border-radius: 5px;
+    font-size: 2rem;
+    color: @base-white;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background-color: @base-white;
+      color: @base-purple;
+    }
+  }
+}

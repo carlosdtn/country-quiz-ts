@@ -1,0 +1,161 @@
+@import '../../../resources/styles/variables.less';
+
+.btn {
+  height: 40px;
+  font-size: 2rem;
+  border-radius: 1rem;
+  font-family: @font-poppins;
+  border-style: none;
+  transition: background-color 500ms, box-shadow 500ms, border-color 500ms,
+    color 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 1px transparent solid;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 8rem;
+
+  &-primary {
+    font-weight: 700;
+    background-color: @base-yellow;
+    color: #fff;
+    &:hover {
+      background-color: @hover-yellow;
+      box-shadow: 0px 2px 4px 0px rgba(252, 168, 47, 0.4);
+    }
+    &:active {
+      background-color: @base-yellow;
+      border-color: @base-yellow;
+    }
+  }
+  &-primary-outline {
+    background-color: #fff;
+    border-color: #1890ff;
+    color: #1890ff;
+    &:hover {
+      background-color: #fff;
+      border-color: #40a9ff;
+      color: #40a9ff;
+    }
+  }
+  &-secondary {
+    background-color: #fff;
+    border-color: #1890ff;
+    color: #1890ff;
+    &:hover {
+      background-color: #fff;
+      border-color: #40a9ff;
+      color: #40a9ff;
+    }
+  }
+  &-secondary-outline {
+    display: flex;
+    justify-content: flex-start;
+    background-color: #fff;
+    border: 0.1rem @base-purple solid;
+    color: @base-purple;
+    width: 100%;
+    &:hover {
+      background-color: #fff;
+      background-color: @base-yellow;
+      color: @base-white;
+      border: 0.1rem @base-yellow solid;
+    }
+  }
+  &-blue-outline {
+    min-width: 13rem;
+    font-size: 1.2rem;
+    font-family: @font-poppins;
+    font-weight: 700;
+    background-color: transparent;
+    border: 0.1rem @base-blue solid;
+    color: @base-blue;
+    width: 100%;
+    text-decoration: none;
+    &:hover {
+      background-color: #fff;
+      background-color: @base-blue;
+      color: @base-white;
+      border: 0.1rem @base-blue solid;
+    }
+  }
+  &-correct {
+    background-color: @base-green;
+    color: @base-white;
+    border: 0.1rem @base-green solid;
+    &:hover {
+      background-color: @hover-green;
+      border: 0.1rem @base-green solid;
+    }
+    &:active {
+      background-color: @base-green;
+      border-color: @base-green;
+    }
+  }
+  &-wrong {
+    background-color: @base-red;
+    color: @base-white;
+    border: 0.1rem @base-red solid;
+    &:hover {
+      background-color: @base-red;
+      border: 0.1rem @base-red solid;
+    }
+    &:active {
+      background-color: @base-red;
+      border-color: @base-red;
+    }
+  }
+}
+
+.answer {
+  &__letter {
+    display: flex;
+    min-width: 15%;
+    font-size: 1.6rem;
+  }
+  &__text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 1.4rem;
+    vertical-align: center;
+    white-space: nowrap;
+    &--start {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      font-size: 1.4rem;
+    }
+  }
+  &--correct {
+    background-color: @base-green;
+    color: @base-white;
+    border: 0.1rem @base-green solid;
+    &:hover {
+      background-color: @hover-green;
+      border: 0.1rem @base-green solid;
+    }
+    &:active {
+      background-color: @base-green;
+      border-color: @base-green;
+    }
+  }
+  &--wrong {
+    background-color: @base-red;
+    color: @base-white;
+    border: 0.1rem @base-red solid;
+    &:hover {
+      background-color: @base-red;
+      border: 0.1rem @base-red solid;
+    }
+    &:active {
+      background-color: @base-red;
+      border-color: @base-red;
+    }
+  }
+}

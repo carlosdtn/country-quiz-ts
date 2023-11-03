@@ -1,4 +1,4 @@
-import { FullCountry, ShortCountry } from './types'
+import { FullCountry } from './types'
 
 export const formatCountries = (countries: FullCountry[]) => {
   const countryList = countries.map((country) => {

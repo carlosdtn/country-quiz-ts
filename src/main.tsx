@@ -1,13 +1,13 @@
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import 'unfonts.css'
+import App from './App.tsx'
+import './index.css'
 import ErrorPage from './pages/error-page/index'
+import GuessFlag from './pages/guess-flag'
 import Menu from './pages/menu'
 import GuessCapital from './pages/quess-capital'
-import GuessFlag from './pages/guess-flag'
 import Result from './pages/result'
-import './index.css'
-import 'unfonts.css'
 
 const router = createBrowserRouter([
   {

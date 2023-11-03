@@ -16,7 +16,10 @@ export const generateQuestions = (countries: ShortCountry[]) => {
     countries.map((country, index) => {
       const question: Question = {
         id: index,
-        prompt: country.capital,
+        prompt: {
+          capital: country.capital,
+          flag: country.flag
+        },
         options: [],
         correctAnswerIndex: 0
       }
@@ -33,4 +36,34 @@ export const generateQuestions = (countries: ShortCountry[]) => {
     })
   )
   return shuffledCountries
+}
+
+export const handleCorrectAnswer = (
+  index: number,
+  indicators: {
+    answerSelected: boolean
+    page: number
+    finalQuestions: Question[]
+  }
+) => {
+  if (indicators.answerSelected) {
+    return (
+      index === indicators.finalQuestions[indicators.page]?.correctAnswerIndex
+    )
+  }
+}
+
+export const handleWrongAnswer = (
+  index: number,
+  indicators: {
+    selectedIndex: number | null
+    page: number
+    finalQuestions: Question[]
+  }
+) => {
+  return (
+    indicators.selectedIndex !==
+      indicators.finalQuestions[indicators.page]?.correctAnswerIndex &&
+    indicators.selectedIndex === index
+  )
 }

@@ -1,12 +1,16 @@
-import { useEffect, useState, useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {
+  handleCorrectAnswer,
+  handleWrongAnswer
+} from '../../../utils/functions'
 import { Question } from 'src/utils/types'
 import Button from '../../../components/ui/button/button'
+import { ScoreContext } from '../../../context/score-context'
 import useCountriesByRegion from '../../../hooks/useCountriesByRegion'
+import CardSkeleton from '../../../skeleton/card-capital'
 import Port from '../../icons/port'
 import './card-capital.less'
-import { ScoreContext } from '../../../context/score-context'
-import CardCapitalSkeleton from '../../../skeleton/card-capital'
 
 const CardCapital = () => {
   const { questions, isLoading } = useCountriesByRegion('europe')
@@ -58,35 +62,21 @@ const CardCapital = () => {
 
   const handleAnswer = (index: number) => {
     setSelectedIndex(index)
-    console.log(index)
     setAnswerSelected(true)
     if (index === finalQuestions[page]?.correctAnswerIndex) {
       setAccumulatedScore(accumulatedScore + 1)
     }
   }
 
-  const handleCorrectAnswer = (index: number) => {
-    if (answerSelected) {
-      return index === finalQuestions[page]?.correctAnswerIndex
-    }
-  }
-
-  const handleWrongAnswer = (index: number) => {
-    return (
-      selectedIndex !== finalQuestions[page]?.correctAnswerIndex &&
-      selectedIndex === index
-    )
-  }
-
   if (isLoading) {
-    return <CardCapitalSkeleton />
+    return <CardSkeleton />
   }
 
   return (
     <div className="card--capital">
       <Port className="icon__port" />
       <h1 className="card__question">
-        {finalQuestions[page]?.prompt} is the capital of
+        {finalQuestions[page]?.prompt.capital} is the capital of
       </h1>
       <div className="capital__answer">
         {finalQuestions[page]?.options.map((alternative, index) => (
@@ -96,8 +86,16 @@ const CardCapital = () => {
             number={index + 1}
             type="button"
             isAnswer
-            isCorrect={handleCorrectAnswer(index)}
-            isWrong={handleWrongAnswer(index)}
+            isCorrect={handleCorrectAnswer(index, {
+              answerSelected,
+              page,
+              finalQuestions
+            })}
+            isWrong={handleWrongAnswer(index, {
+              selectedIndex,
+              page,
+              finalQuestions
+            })}
             onClick={() => handleAnswer(index)}
             disabled={answerSelected}
           >

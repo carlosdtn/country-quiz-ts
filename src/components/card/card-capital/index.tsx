@@ -1,36 +1,85 @@
-import { generateQuestions } from '../../../utils/functions'
+import { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Question } from 'src/utils/types'
 import Button from '../../../components/ui/button/button'
 import useCountriesByRegion from '../../../hooks/useCountriesByRegion'
-import { formatCountries } from '../../../utils/formatters'
 import Port from '../../icons/port'
 import './card-capital.less'
-import { useCallback, useState, useEffect } from 'react'
-import { Question } from 'src/utils/types'
-import classNames from 'classnames'
+import { ScoreContext } from '../../../context/score-context'
+import CardCapitalSkeleton from '../../../skeleton/card-capital'
 
 const CardCapital = () => {
-  const { questions, isLoading, error } = useCountriesByRegion('europe')
+  const { questions, isLoading } = useCountriesByRegion('europe')
+  const [answerSelected, setAnswerSelected] = useState<boolean>(false)
   const [page, setPage] = useState<number>(0)
-  const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [finalQuestions, setFinalQuestions] = useState<Question[]>([])
+  const [accumulatedScore, setAccumulatedScore] = useState<number>(0)
+  const { setScore } = useContext(ScoreContext)
+  const history = useNavigate()
+  const totalQuestions = 5
 
-  console.log('questions', questions)
+  const gotoResults = () => {
+    if (page === totalQuestions) {
+      setScore(accumulatedScore)
+      history('/result')
+    }
+  }
   useEffect(() => {
-    setFinalQuestions(questions)
+    setFinalQuestions(questions.slice(0, totalQuestions))
+    setSelectedIndex(null)
   }, [isLoading])
+
+  useEffect(() => {
+    gotoResults()
+  }, [page])
+
+  useEffect(() => {
+    const unloadCallback = (event: {
+      preventDefault: () => void
+      returnValue: string
+    }) => {
+      event.preventDefault()
+      event.returnValue = ''
+      return ''
+    }
+
+    window.addEventListener('beforeunload', unloadCallback)
+    return () => {
+      window.removeEventListener('beforeunload', unloadCallback)
+    }
+  }, [])
 
   const handleNext = () => {
     setPage(page + 1)
+    setSelectedIndex(null)
+    setAnswerSelected(false)
   }
 
   const handleAnswer = (index: number) => {
     setSelectedIndex(index)
     console.log(index)
+    setAnswerSelected(true)
     if (index === finalQuestions[page]?.correctAnswerIndex) {
-      console.log('correct')
-    } else {
-      console.log('incorrect')
+      setAccumulatedScore(accumulatedScore + 1)
     }
+  }
+
+  const handleCorrectAnswer = (index: number) => {
+    if (answerSelected) {
+      return index === finalQuestions[page]?.correctAnswerIndex
+    }
+  }
+
+  const handleWrongAnswer = (index: number) => {
+    return (
+      selectedIndex !== finalQuestions[page]?.correctAnswerIndex &&
+      selectedIndex === index
+    )
+  }
+
+  if (isLoading) {
+    return <CardCapitalSkeleton />
   }
 
   return (
@@ -47,12 +96,15 @@ const CardCapital = () => {
             number={index + 1}
             type="button"
             isAnswer
+            isCorrect={handleCorrectAnswer(index)}
+            isWrong={handleWrongAnswer(index)}
             onClick={() => handleAnswer(index)}
+            disabled={answerSelected}
           >
             {alternative}
           </Button>
         ))}
-        {selectedIndex === finalQuestions[page]?.correctAnswerIndex && (
+        {answerSelected && (
           <Button variant="primary" onClick={handleNext}>
             Next
           </Button>
